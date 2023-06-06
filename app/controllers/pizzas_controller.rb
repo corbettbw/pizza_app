@@ -1,28 +1,29 @@
 class PizzasController < ApplicationController
   before_action :set_pizza, only: %i[ show edit update destroy ]
-
+  include PizzasHelper
+  
   # GET /pizzas or /pizzas.json
   def index
     @pizzas = Pizza.all
   end
-
+  
   # GET /pizzas/1 or /pizzas/1.json
   def show
   end
-
+  
   # GET /pizzas/new
   def new
     @pizza = Pizza.new
   end
-
+  
   # GET /pizzas/1/edit
   def edit
   end
-
+  
   # POST /pizzas or /pizzas.json
   def create
     @pizza = Pizza.new(pizza_params)
-
+    
     respond_to do |format|
       if @pizza.save
         format.html { redirect_to pizza_url(@pizza), notice: "Pizza was successfully created." }
@@ -56,15 +57,15 @@ class PizzasController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pizza
-      @pizza = Pizza.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_pizza
+    @pizza = Pizza.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def pizza_params
-      params.require(:pizza).permit(:name, :description)
+      params.require(:pizza).permit(:name, :description, toppings: [])
     end
 end

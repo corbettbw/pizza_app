@@ -2,11 +2,28 @@
   <p>
     <strong>Name:</strong>
     <%= pizza.name %>
-  </p>
-
-  <p>
+   </p>
+    
+    <p>
     <strong>Description:</strong>
     <%= pizza.description %>
   </p>
-
+  <p><strong>Toppings:</strong>
+    <% if pizza.toppings != nil %>
+      <% toppings_array = JSON.parse(pizza.toppings) %>
+      <ul>
+      <% toppings_array.each do |topping| %>
+        <% if Topping.find_by(name:topping) == nil %>
+          <div style="color: red">
+            <li><%= topping + "   **Out of that topping**" %></li>
+          </div>
+        <% else %>
+            <li><%= topping %></li>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= "No Toppings" %>
+    <% end %>
+    </ul>
+  </p>
 </div>

@@ -20,6 +20,20 @@
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
   </div>
+  <div>
+    <strong>Choose Your Toppings:</strong>
+    <p>
+      <% Topping.all.each do |topping| %>
+        <p>
+        <%= check_box_tag 'pizza[toppings][]',
+                          value = topping.name,
+                          checked = checking_toppings(pizza,topping),
+                          class: 'topping-checkbox' %>
+        <%= topping.name %>
+        </p>
+      <% end %>
+    </p>
+  </div>
 
   <div>
     <%= form.submit %>
