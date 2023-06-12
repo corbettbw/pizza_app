@@ -33,9 +33,10 @@
         </p>
       <% end %>
       <p style="color: red">
+      <% if pizza.toppings != nil %>
         <% expiredToppings = topping_expired(pizza) %>
-        <% if !expiredToppings.nil? && expiredToppings.last == true %>
-          <% expiredToppings.reverse.drop(1).each do |expired_topping| %>
+        <% if expiredToppings != nil %>
+          <% expiredToppings.each do |expired_topping| %>
             <%= check_box_tag 'pizza[toppings][]',
                           value = expired_topping,
                           checked = true,
@@ -43,6 +44,7 @@
             <%= expired_topping + "    **This pizza requires a topping you don't have. If you want to keep this topping, leave it checked and add it to your toppings list" %>
           <% end %>
         <% end %>
+      <% end %>
       </p>
     </p>
   </div>

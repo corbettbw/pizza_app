@@ -8,15 +8,13 @@ module PizzasHelper
     end
 
     def topping_expired(pizza)
-        if pizza.toppings != nil
-            toppingsArray = []
-            JSON.parse(pizza.toppings).each do |topping|
-                if Topping.all.collect(&:name).include?(topping) == false
-                    toppingsArray.push topping
-                end
+        expiredToppings = []
+        JSON.parse(pizza.toppings).each do |topping|
+            if Topping.all.collect(&:name).include?(topping) == false
+                expiredToppings.push topping
             end
-            toppingsArray.empty? ? (toppingsArray.push false):(toppingsArray.push true)
         end
+        return expiredToppings
     end
 end
 # conditions: pizza exists, has toppings, and one of the toppings doesn't exist
