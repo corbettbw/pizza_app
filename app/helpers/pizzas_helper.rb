@@ -1,15 +1,15 @@
 module PizzasHelper
     def checking_toppings(pizza, topping)
-        if pizza.toppings == nil || !JSON.parse(pizza.toppings).include?(topping.name)
+        if pizza.toppings == nil || !pizza.toppings.include?(topping.name)
             return false
-        elsif JSON.parse(pizza.toppings).include?(topping.name)
+        elsif pizza.toppings.include?(topping.name)
             return true
         end
     end
 
     def topping_expired(pizza)
         expiredToppings = []
-        JSON.parse(pizza.toppings).each do |topping|
+        pizza.toppings.each do |topping|
             if Topping.all.collect(&:name).include?(topping) == false
                 expiredToppings.push topping
             end

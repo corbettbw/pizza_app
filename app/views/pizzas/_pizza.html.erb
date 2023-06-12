@@ -10,7 +10,7 @@
   </p>
   <p><strong>Toppings:</strong>
     <% if pizza.toppings != nil %>
-      <% toppings_array = JSON.parse(pizza.toppings) %>
+      <% toppings_array = pizza.toppings %>
       <ul>
       <% toppings_array.each do |topping| %>
         <% if Topping.find_by(name:topping) == nil %>
